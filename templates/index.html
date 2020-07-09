@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+     <style>
+
+          body {
+            background-image: url('../static/background.jpg');
+            background-repeat: no-repeat;
+            background-size:cover;
+            height:120vh;
+          }
+
+          #content {
+            margin-left:170px;
+            margin-top: 300px;
+          }
+
+          #form {color:white;}
+
+          #title1 {
+              font-family:fantasy;
+              color: white;
+              font-size:60px;
+          }
+
+          #title2 {
+              font-family:fantasy;
+              color:white
+          }
+
+     </style>
+     <title>Pixelate</title>
+     <body>
+           <div id="content">
+                 <h1 id="title1">Upload an Image</h1>
+                 <form id="form" method=post enctype=multipart/form-data>
+                       <input type=file name=file><br><br>
+                       <h3 id="title2">Choose Pixel Size from {4, 8, 16, 32, 64} </h3>
+                       <input type=text name="pixel_size">
+                       <input type=submit value=Upload>
+                 </form>
+           </div>
+   </body>
+</html>
