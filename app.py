@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 import os
 import cv2
+import shutil
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/input'
@@ -13,6 +14,24 @@ app.config['PIXELATED_FOLDER'] = PIXELATED_FOLDER
 
 def allowed_file(img_name):
     return '.' in img_name and img_name.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@app.route('/clear')
+def clear():
+    for filename in os.listdir(UPLOAD_FOLDER):
+        filepath = os.path.join(UPLOAD_FOLDER, filename)
+        try:
+            shutil.rmtree(filepath)
+        except OSError:
+            os.remove(filepath)
+    for filename in os.listdir(PIXELATED_FOLDER):
+        filepath = os.path.join(PIXELATED_FOLDER, filename)
+        try:
+            shutil.rmtree(filepath)
+        except OSError:
+            os.remove(filepath)
+    return redirect('/')
+
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
